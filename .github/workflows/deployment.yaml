@@ -31,8 +31,8 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
         run: |
           aws ecr-public get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ECR }}
-          docker build -t helloworldrepository .
-          docker tag helloworldrepository:latest public.ecr.aws/r2y3p5d6/helloworldrepository:latest
-          docker push public.ecr.aws/r2y3p5d6/helloworldrepository:latest
+          docker build -t $AWS_REPOSITORY .
+          docker tag $AWS_REPOSITORY:latest ${{ secrets.AWS_ECR }}/$AWS_REPOSITORY:latest
+          docker push ${{ secrets.AWS_ECR }}/$AWS_REPOSITORY:latest
 
 
